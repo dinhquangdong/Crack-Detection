@@ -1,0 +1,21 @@
+1. Nghiên cứu bộ dataset: gồm có mấy bộ, mỗi bộ bao nhiêu hình.
+
+2. Chạy Deepcrack và CrackFormer để dự đoán ra hình vết nứt.
+
+3. Với mỗi ảnh được gán nhãn, sử dụng một threshold nhị phân để đánh giá các kết quả khác nhau.
+
+4. Với các nhãn được dự đoán của mỗi mô hình, có hai hướng đánh giá:
+    + ODS (Optimal Dataset Scale):
+        * Duyệt qua từng threshold:
+            Duyệt qua từng cặp ảnh pred, groundtruth:
+                Tính TP, FP, FN cho từng cặp ảnh
+
+            Cộng tất cả các giá trị TP, FP, FN lại
+        => Trả về một mảng, các phần tử là [threshold, TP, FP, FN, F1-score]
+
+    + OIS (Optimal Image Scale):
+        * Duyệt qua từng cặp pred, groundtruth:
+            Duyệt qua từng threshold:
+                Tính TP, FP, FN cho từng threshold
+            Tìm ra F1 score cao nhất ứng với các giá trị threshold
+        => Trả về trung bình các giá trị F1 score cho tất cả các cặp ảnh
